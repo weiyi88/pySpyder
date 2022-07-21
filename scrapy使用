@@ -1,0 +1,27 @@
+一.安装scrapy
+    1，最好使用aconda
+    2, python 版本选择3.8
+二，scrapy项目创建&运行
+    1， 终端输入 scrapy startproject 项目名
+
+    2，项目组成
+            spiders：
+                __init__.py
+                自定义的文件     ==>实现爬虫的核心功能文件
+            __init__.py
+            items.py        ==> 定义数据结构的地方，是继承scrapy.Item的类
+            middlewares.py  ==> 中间件  代理
+            pipelines.py    ==> 管道文件，里面只有一个类，用户处理下载数据的后续处理，默认是300优先级，值越小优先级越高（1-1000）
+            settings.py     ==> 配置文件 比如：是否遵守robots协议，user-agent定义等
+
+    3，创建爬虫文件
+        1,进入项目文件夹
+        2， scrapy genspider 爬虫名字 网页的域名（不用带http协议）
+
+
+    4，运行爬虫代码
+        scrapy crawl 爬虫名
+
+三，获取数据
+    response.text 获取的是响应的字符串
+    response.body 获取的是二进制数据
