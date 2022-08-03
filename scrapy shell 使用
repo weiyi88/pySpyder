@@ -1,0 +1,4 @@
+方便调试
+1，在终端下载，ipython  ，  pip install ipython
+2，scrapy shell www.baidu.com
+3,进入scarpy 调试，可以使用response

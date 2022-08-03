@@ -25,3 +25,32 @@
 三，获取数据
     response.text 获取的是响应的字符串
     response.body 获取的是二进制数据
+    response.xpath 可以直接是xpath方法解析response中的内容
+    response.extract()  提取seletor 对象的data属性值
+    response.extract_first() 提取selector 列表的第一个值
+
+四，scrapy 架构组成
+     (1) 引擎      自动运行，无需关注，会自动组织所有的请求对象给下载器
+    （2） 下载器     从引擎中获取到请求对象后，请求数据
+    （3） spiders    spider类定义了如何爬去某个（或某些）网站，包括了爬取动作（例如是否跟进链接）以及如何从网页中内容提取结构化数据（爬取item），换句话说，spider就是定义您爬取的动作以及分析某个网页（或者某些网页）地方
+    （4） 调度去     有自己的调度规则，无需关注
+    （5）管道（item pipeline）    最终处理数据的管道，会预留借口供我们处理数据
+                                当Item在spider中收集之后，他会被传递到Item Pipeline，一些组建会按照一定的顺序执行对Item对处理
+                                每个Item pipline组建（有时称之为"Item Pipline"）是实现了简单的Python类，他们接收到Itme并通过它执行一些行为，同时也决定Item是否积蓄通过pipLine，或是被丢弃不再进行处理。
+                                一下item pipline 的一些经典应用：
+                                1，清理Html数据
+                                2，验证爬取的数据（检查item包含某些字段）
+                                3，查重（并丢弃）
+                                4，将爬取结果保存到数据库中
+五，scrapy工作原理
+1，引擎向spiders要uid
+2，引擎将要爬取的url给调度器
+3，调度器将url生成的请求对象放入制定的队列中
+4，从队列中出队一个请求
+5，引擎将请求交给下载器进行处理
+6，下载器发送请求获取互联网数据
+7，下载器将数据返回给引擎
+8，引擎将数据再次给到spiders
+9，spiders通过xpath解析该数据，得到数据或者url
+10，spiders将数据或者url给引擎
+
